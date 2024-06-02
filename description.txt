@@ -1,0 +1,1 @@
+design a django project with a core level app that will access smaller apps in apps directory

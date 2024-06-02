@@ -1,0 +1,44 @@
+section: URL dispatcher
+address: https://docs.djangoproject.com/en/5.0/topics/http/urls/
+
+- Including other URLconfs
+
+
+from django.urls import include, path
+
+urlpatterns = [
+    path("community/", include("aggregator.urls")),
+    path("contact/", include("contact.urls")),
+]
+
+- django takes the url that matches the above address, chops the first part, and sends the rest to the included urlconf for further processing
+
+skipping ...
+
+- URL namespaces
+
+url namespaces can have two parts
+    application namespace
+    instance namespace
+
+instance namespaces should be unique across the entire project.
+
+namespaced urls are specified using the : operator.
+example: admin:index -> namespace of admin, and a named url of index
+
+namespaces can be nested.
+example: sports:polls:index (look for named url of index in namespace of polls which it itself is defined in the top level namespace of sports)
+
+- Reversing namespaced urls
+
+consider polls:index
+1. django will look for application namespace which here is polls
+2. current application will be polls, the url resolver will be returned,
+    current_app arguemnt in reverse() function
+    can be accessed with request.current_app
+3, 4, 5 ...
+this process is continued until a view is reached.
+
+this is complicated as hell...
+
+moving on to URL namespaces and included URLconfs
